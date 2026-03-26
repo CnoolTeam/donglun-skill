@@ -45,7 +45,7 @@ export CNOOL_API_TOKEN="your_token_here"
 复制示例配置文件并填入你的 token：
 
 ```bash
-cp config.json.example config.json
+cp config.example.json config.json
 ```
 
 编辑 `config.json`：
@@ -144,7 +144,7 @@ donglun-poster/
 ├── SKILL.md              # Skill 定义文件
 ├── README.md             # 本文件
 ├── config.json           # 配置文件
-├── config.json.example   # 配置文件模板
+├── config.example.json   # 配置文件模板
 └── scripts/
     └── post_donglun.py   # 主脚本
 ```

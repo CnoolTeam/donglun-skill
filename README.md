@@ -28,7 +28,7 @@ cd donglun-skill
 3. 配置 Token（三种方式任选其一）：
    - **环境变量**: `export CNOOL_API_TOKEN="your_token"`
    - **命令行参数**: `-k "your_token"`
-   - **配置文件**: 复制 `config.json.example` 为 `config.json` 并填入 token
+   - **配置文件**: 复制 `config.example.json` 为 `config.json` 并填入 token
 
 ### 使用示例
 
