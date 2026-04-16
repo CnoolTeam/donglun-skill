@@ -61,7 +61,7 @@ cp config.example.json config.json
 在 Agent 中：
 
 ```
-/skill donglun-poster --hot
+/skill donglun-cli --hot
 ```
 
 或直接运行脚本：
@@ -140,7 +140,7 @@ python scripts/post_donglun.py -r "10939082" -c @reply.txt
 ## 文件结构
 
 ```
-donglun-poster/
+donglun-cli/
 ├── SKILL.md              # Skill 定义文件
 ├── README.md             # 本文件
 ├── config.json           # 配置文件
