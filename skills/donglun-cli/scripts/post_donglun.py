@@ -4,6 +4,7 @@
 东论发帖脚本
 用于在东方热线论坛发布新帖子
 使用预先配置的 token 直接发帖，无需登录
+支持 Markdown 格式转换为 HTML
 """
 
 import argparse
@@ -11,7 +12,11 @@ import json
 import sys
 import os
 import urllib.request
+import re
 from typing import Dict, Optional
+
+# 导入 Markdown 转换器
+from markdown_converter import markdown_to_html, MARKDOWN_AVAILABLE
 
 # Windows 下设置 UTF-8 编码
 if sys.platform == 'win32':
@@ -266,6 +271,7 @@ def main():
     parser.add_argument("--size", "-s", type=int, default=20, help="每页条数，默认20")
     parser.add_argument("--view", "-v", type=str, help="查看帖子详情，参数为帖子ID")
     parser.add_argument("--replies", type=str, help="查看回复列表，参数为帖子ID")
+    parser.add_argument("--markdown", "-m", action="store_true", help="将内容作为 Markdown 格式处理，转换为 HTML 后发帖")
 
     args = parser.parse_args()
 
@@ -344,6 +350,12 @@ def main():
     # 判断是发帖还是回帖
     if args.reply:
         # 回帖模式
+        # 如果指定了 markdown，转换内容为 HTML
+        if args.markdown:
+            content = markdown_to_html(content)
+            if not MARKDOWN_AVAILABLE:
+                print("提示：未安装 'markdown' 库，使用基础正则转换。如需更好的转换效果，请运行: pip install markdown")
+
         success, reply_id = client.reply_to_thread(args.reply, content)
         if success and reply_id:
             print(f"回复ID: {reply_id}")
@@ -353,6 +365,12 @@ def main():
             parser.print_help()
             print("\n错误：发帖时需要提供标题 (-t)")
             sys.exit(1)
+
+        # 如果指定了 markdown，转换内容为 HTML
+        if args.markdown:
+            content = markdown_to_html(content)
+            if not MARKDOWN_AVAILABLE:
+                print("提示：未安装 'markdown' 库，使用基础正则转换。如需更好的转换效果，请运行: pip install markdown")
 
         success, article_id = client.post_thread(args.title, content)
 

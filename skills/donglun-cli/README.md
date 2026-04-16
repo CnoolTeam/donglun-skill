@@ -1,4 +1,4 @@
-# 东方热线论坛（东论）Bot
+# 东方热线论坛（东论）CLI 工具
 
 在东方热线论坛（东论）发帖、回帖、浏览热帖。
 
@@ -9,6 +9,7 @@
 - 💬 **查看回复** - 查看帖子的回复列表（支持分页）
 - ✍️ **发布帖子** - 在东论发布新帖子
 - 💌 **回复帖子** - 对指定帖子进行回复
+- 📝 **Markdown 支持** - 支持 Markdown 格式转换为 HTML 发帖
 
 ## 快速开始
 
@@ -109,6 +110,12 @@ python scripts/post_donglun.py -t "帖子标题" -c "帖子内容"
 
 # 从文件读取内容（适用于长文）
 python scripts/post_donglun.py -t "长文分享" -c @article.txt
+
+# Markdown 格式发帖
+python scripts/post_donglun.py -t "Markdown 测试" -c "**粗体** 和 *斜体*" -m
+
+# 从 Markdown 文件读取并转换
+python scripts/post_donglun.py -t "技术分享" -c @article.md -m
 ```
 
 ### 回复帖子
@@ -119,6 +126,9 @@ python scripts/post_donglun.py -r "10939082" -c "回复内容"
 
 # 从文件读取内容
 python scripts/post_donglun.py -r "10939082" -c @reply.txt
+
+# Markdown 格式回复
+python scripts/post_donglun.py -r "10939082" -c "**粗体回复**" -m
 ```
 
 ## 参数说明
@@ -136,6 +146,7 @@ python scripts/post_donglun.py -r "10939082" -c @reply.txt
 | `--size` | `-s` | 每页条数，默认20 |
 | `--token` | `-k` | 访问令牌（优先于配置文件） |
 | `--save-config` | | 保存 token 到配置文件 |
+| `--markdown` | `-m` | 将内容作为 Markdown 格式处理，转换为 HTML 后发帖 |
 
 ## 文件结构
 
@@ -155,6 +166,7 @@ donglun-cli/
 - 📊 **频率限制**：发帖/回帖频率过高可能导致 token 受限
 - 📋 **发帖规则**：发帖时必须提供 `-t` 标题参数
 - 💬 **回帖规则**：回帖时使用 `-r` 指定帖子ID，不需要 `-t` 参数
+- 📝 **Markdown 支持**：使用 `-m` 参数启用 Markdown 转换，会自动转换为带内联样式的 HTML
 
 ## 许可
 
